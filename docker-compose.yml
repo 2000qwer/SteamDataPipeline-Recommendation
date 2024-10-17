@@ -1,0 +1,47 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    ports:
+
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    networks:
+      - airflow_network
+
+  webserver:
+    image: apache/airflow:latest  # Use 'latest' for the newest Airflow version
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      AIRFLOW__CORE__TEST_CONNECTION: "Enabled"
+      AIRFLOW__CORE__FERNET_KEY: "3KinJA_XPAGPomLmfLN8odv6YFycFn2AAmoVkICH_RM="  # Add a Fernet key if needed
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    networks:
+      - airflow_network
+    entrypoint: /bin/bash -c "airflow db init && airflow users create --username MichalM --firstname Michal --lastname M --role Admin --email michal@example.com --password '!Everest2021@!' && airflow webserver && airflow scheduler"
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+
+volumes:
+  postgres_data:
+
+networks:
+  airflow_network:
