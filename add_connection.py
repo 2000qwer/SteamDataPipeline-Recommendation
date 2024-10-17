@@ -10,7 +10,7 @@ def add_connection(session=None):
     host = '127.0.0.1'  # SQL Server hostname or IP address
     schema = 'multi_category_store'  # Database name
     login = 'MichalM'  # Username
-    password = '!Everest2021@!'  # Password
+    password = 'test'  # Password
     port = 50335  # Port number you found
 
     # Create a new Connection object
