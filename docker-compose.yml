@@ -33,7 +33,7 @@ services:
       - ./plugins:/opt/airflow/plugins
     networks:
       - airflow_network
-    entrypoint: /bin/bash -c "airflow db init && airflow users create --username MichalM --firstname Michal --lastname M --role Admin --email michal@example.com --password '!Everest2021@!' && airflow webserver && airflow scheduler"
+    entrypoint: /bin/bash -c "airflow db init && airflow users create --username MichalM --firstname Michal --lastname M --role Admin --email michal@example.com --password 'test' && airflow webserver && airflow scheduler"
     healthcheck:
       test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
       interval: 30s
