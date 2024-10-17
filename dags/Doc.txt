@@ -1,0 +1,141 @@
+airflow users create \
+    --username MichalM \
+    --firstname Michal \
+    --lastname M \
+    --role Admin \
+    --email michalm@example.com \
+    --password '!Everest2021@!'
+
+apache airflow
+
+
+docker ps 
+
+docker exec -it <container_name> /bin/bash
+
+
+
+pip install apache-airflow-providers-microsoft-mssql
+pip install pyodbc
+
+--priovdier installation into airflow 
+pip install apache-airflow-providers-microsoft-mssql==3.1
+
+docker exec -u 0 -it mycontainer bash
+
+RUN echo 'root:Docker!' | chpasswd
+
+https://girishdeshpande.medium.com/apache-airflow-on-docker-ms-sql-server-etl-dag-a8317da5cbcc
+
+
+
+--Adiing new connection
+
+docker cp add_connection.py <container_id>:/opt/airflow/add_connection.py
+
+
+
+-- chang euser in linux
+
+su userbname
+
+
+
+---
+
+22AB7B290037490813DF382FD4F94FA4 - steam web api
+
+
+
+---------------
+AWS
+
+ACC ID: 626730795820
+ACC Name: michalmatracz
+
+Console created user:
+
+{
+    "User": {
+        "Path": "/",
+        "UserName": "MichalM",
+        "UserId": "AIDAZD3ARAMWC4MXPMM3J",
+        "Arn": "arn:aws:iam::626730795820:user/MichalM",
+        "CreateDate": "2024-08-26T20:51:29+00:00"
+    }
+}
+
+--Access point
+arn:aws:s3:eu-north-1:626730795820:accesspoint/SteamDataAccessPoint
+
+
+--AWS MichalM access to storage
+
+{
+    "AccessKey": {
+        "UserName": "MichalM",
+        "AccessKeyId": "AKIAZD3ARAMWGGXHC453",
+        "Status": "Active",
+        "SecretAccessKey": "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",
+        "CreateDate": "2024-08-26T21:12:16+00:00"
+    }
+}
+
+--Cele
+
+
+Obeznanie AWS s3 storage 
+Przenalizowanie gier steam oraz zgranie tytułów, do czego wykorzytsać api  
+Przeanalizowanie kont użytkjowików
+Autmatyzacacja z poziomu optymalizacji pobierania danych bazując na tych które są juz zgrane : - przerzucnie danych na AWS 3 i do mssql servera - prostu z html providera używając airflow-a
+Czy można ruszać proces etl na uśpieniu? Głowne pytanie 
+Jak przedstawić dane, czy stworyć stronie?
+
+
+
+
+
+
+------------------------------------Przykłąd i linki do pobrania danych
+
+There is no "Steam API all games and all their details in one go".
+
+You use GetAppList to get all the steam apps. Then you have to query each app with appdetails which will take a long time.
+
+GetAppList : http://api.steampowered.com/ISteamApps/GetAppList/v0002/?format=json
+{
+  "applist": {
+    "apps": [
+      {"appid": 10, "name": "Counter-Strike"},
+      {"appid": 20, "name": "Team Fortress Classic"},
+      {"appid": 30, "name": "Day of Defeat"},
+      {"appid": 40, "name": "Deathmatch Classic"}
+    ]
+  }
+}
+appdetails : http://store.steampowered.com/api/appdetails?appids=10
+{
+  "10": {
+    "success": true, 
+    "data": {
+      "type": "game",
+      "name": "Counter-Strike",
+      "steam_appid": 10,
+      "required_age": 0,
+      "is_free": false,
+      "detailed_description": "...",
+      "about_the_game": "...",
+      "short_description": "...",
+      "developers": ["Valve"],
+      "publishers": ["Valve"],
+      "EVEN_MORE_DATA": {}
+    }
+  }
+}
+There is a general API rate limit for each unique IP adress of 200 requests in five minutes which is one request every 1.5 seconds.
+
+Another solution would be to use a third-party service such as SteamApis which offers more options but they are inevitably bound to what Steam offers in their API.
+
+
+
+
