@@ -4,7 +4,7 @@ airflow users create \
     --lastname M \
     --role Admin \
     --email michalm@example.com \
-    --password '!Everest2021@!'
+    --password 'test'
 
 apache airflow
 
@@ -73,11 +73,7 @@ arn:aws:s3:eu-north-1:626730795820:accesspoint/SteamDataAccessPoint
 
 {
     "AccessKey": {
-        "UserName": "MichalM",
-        "AccessKeyId": "AKIAZD3ARAMWGGXHC453",
-        "Status": "Active",
-        "SecretAccessKey": "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",
-        "CreateDate": "2024-08-26T21:12:16+00:00"
+       
     }
 }
 
